@@ -1,4 +1,5 @@
 const express = require('express');
+const { sql } = require('drizzle-orm');
 const { join } = require('node:path');
 const validator = require('validator');
 const { getDb } = require('./db/index.js');
