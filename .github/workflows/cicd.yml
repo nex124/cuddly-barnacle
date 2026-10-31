@@ -60,6 +60,7 @@ jobs:
         with:
           context: .
           push: true
+          tags: |
             ${{ vars.DOCKERHUB_USERNAME }}/cicd:latest
             ${{ vars.DOCKERHUB_USERNAME }}/cicd:${{ github.sha }}
       - name: Trigger Render deploy
@@ -68,4 +69,4 @@ jobs:
           IMAGE_URL: docker.io/${{ vars.DOCKERHUB_USERNAME }}/cicd:${{ github.sha }}
         run: |
           ENCODED_IMAGE_URL=$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["IMAGE_URL"], safe=""))')
-          curl -fsS -X POST "${RENDER_DEPLOY_HOOK_URL}&imgURL=${ENCODED_IMAGE_URL}"      
+          curl -fsS -X POST "${RENDER_DEPLOY_HOOK_URL}&imgURL=${ENCODED_IMAGE_URL}"
